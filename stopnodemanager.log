@@ -1,7 +1,0 @@
-<2021-04-22 GMT 00:35:20> <Info> <StopNodeManager> <Begin>
-<2021-04-22 GMT 00:35:20> <Info> <StopNodeManager> <Adding NodeManagerHome entry to JAVA_OPTIONS: -DNodeManagerHome=/u01/oracle/config/scripts>
-<2021-04-22 GMT 00:35:20> <Info> <StopNodeManager> <Root Directory already set /u01/oracle/config/domains/autoscalingDomain>
-<2021-04-22 GMT 00:35:20> <Info> <StopNodeManager> <NodeManager process id file not found: /u01/oracle/config/scripts/nodemanager.process.id>
-<2021-04-22 GMT 00:35:20> <Info> <StopNodeManager> <Scanning for appropriate NodeManager process to shutdown.>
-<2021-04-22 GMT 00:35:20> <Info> <StopNodeManager> <No candidate processes were available for consideration.>
-<2021-04-22 GMT 00:35:20> <Error> <StopNodeManager> <Could not locate a NodeManager process id that matched required content of RootDirectory=/u01/oracle/config/domains/autoscalingDomain>
