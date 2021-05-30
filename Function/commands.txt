@@ -1,0 +1,20 @@
+# Create fn context using Oracle provider
+fn create context wl-autoscaling-fn –-provider oracle
+# Switch to new context created
+fn use context wl-autoscaling-fn
+# update context variables (compartment-id, Docker registery to OCI container registry and api endpoint URL for OCI function
+fn update context oracle.compartment-id <<compartment OCID>>
+fn update context registry <<OCI Region>>.ocir.io/<<Registery Namespace>>/<<Repository Name>>
+fn update context api-url https://functions.<<OCI Region>>.oci.oraclecloud.com
+# Create your function
+fn init --runtime python wl-autoscaling-fn
+# After this you need to update func.py and requirements.txt with your function code and OCI function dependencies
+
+# Deploy the fucntion in OCI (create Docker container nad import in OCI container registry)
+fn -v deploy --app omid-app  
+
+# Invoke OCI function
+echo -n <<enevnt payload>> | fn invoke omid-app wl-autoscaling-fn
+
+# Sample event paylod  (update resourceID with OCID of terminated instance for test the function)
+{\n  "eventType": "com.oraclecloud.computeapi.terminateinstance.begin",\n  "cloudEventsVersion": "0.1",\n  "eventTypeVersion": "2.0",\n  "source": "ComputeApi",\n  "eventTime": "2019-08-19T16:19:38.351Z",\n  "contentType": "application/json",\n  "data": {\n    "compartmentId": "ocid1.compartment.oc1..unique_ID",\n    "compartmentName": "example_compartment",\n    "resourceName": "my_instance",\n    "resourceId": "ocid1.instance.oc1.phx.unique_ID",\n    "availabilityDomain": "availability_domain",\n    "additionalDetails": {\n      "imageId": "ocid1.image.oc1.phx.unique_ID",\n      "shape": "VM.Standard2.1",\n      "type": "CustomerVmi"\n    }\n  },\n  "eventID": "unique_ID",\n  "extensions": {\n    "compartmentId": "ocid1.compartment.oc1..unique_ID"\n  }\n}' 
